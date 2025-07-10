@@ -1,0 +1,998 @@
+{
+  "timestamp": "2025-07-10T18:41:27.607Z",
+  "summary": {
+    "api": {
+      "passed": 16,
+      "failed": 0,
+      "total": 16
+    },
+    "frontend": {
+      "passed": 12,
+      "failed": 0,
+      "total": 12
+    },
+    "overall_success_rate": 100
+  },
+  "api_results": [
+    {
+      "test": "Auth Callback",
+      "path": "/api/auth/callback",
+      "method": "GET",
+      "status": 200,
+      "success": true,
+      "error": null,
+      "data": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><link rel=\"preload\" href=\"/_next/static/media/eafabf029ad39a43-s.p.woff...",
+      "hasData": true
+    },
+    {
+      "test": "Emission Factors",
+      "path": "/api/carbon-calculator/emission-factors",
+      "method": "GET",
+      "status": 200,
+      "success": true,
+      "error": null,
+      "data": {
+        "factors": [
+          {
+            "id": "mock-10",
+            "category": "transport",
+            "subcategory": "air_domestic_short",
+            "scope": 3,
+            "emission_factor": 0.24,
+            "unit": "passenger_km",
+            "source": "DEFRA 2023",
+            "methodology": "Average aircraft",
+            "gwp_ar5": true,
+            "region": "GLOBAL",
+            "year": 2023
+          },
+          {
+            "id": "mock-11",
+            "category": "transport",
+            "subcategory": "air_international_long",
+            "scope": 3,
+            "emission_factor": 0.19,
+            "unit": "passenger_km",
+            "source": "DEFRA 2023",
+            "methodology": "Average aircraft",
+            "gwp_ar5": true,
+            "region": "GLOBAL",
+            "year": 2023
+          },
+          {
+            "id": "mock-12",
+            "category": "material",
+            "subcategory": "steel",
+            "scope": 3,
+            "emission_factor": 2.89,
+            "unit": "kg",
+            "source": "DEFRA 2023",
+            "methodology": "Cradle-to-gate",
+            "gwp_ar5": true,
+            "region": "GLOBAL",
+            "year": 2023
+          },
+          {
+            "id": "mock-13",
+            "category": "material",
+            "subcategory": "aluminum",
+            "scope": 3,
+            "emission_factor": 11.46,
+            "unit": "kg",
+            "source": "DEFRA 2023",
+            "methodology": "Cradle-to-gate",
+            "gwp_ar5": true,
+            "region": "GLOBAL",
+            "year": 2023
+          },
+          {
+            "id": "mock-14",
+            "category": "material",
+            "subcategory": "concrete",
+            "scope": 3,
+            "emission_factor": 0.13,
+            "unit": "kg",
+            "source": "DEFRA 2023",
+            "methodology": "Cradle-to-gate",
+            "gwp_ar5": true,
+            "region": "GLOBAL",
+            "year": 2023
+          }
+        ],
+        "grouped": {
+          "3": {
+            "transport": [
+              {
+                "id": "mock-10",
+                "category": "transport",
+                "subcategory": "air_domestic_short",
+                "scope": 3,
+                "emission_factor": 0.24,
+                "unit": "passenger_km",
+                "source": "DEFRA 2023",
+                "methodology": "Average aircraft",
+                "gwp_ar5": true,
+                "region": "GLOBAL",
+                "year": 2023
+              },
+              {
+                "id": "mock-11",
+                "category": "transport",
+                "subcategory": "air_international_long",
+                "scope": 3,
+                "emission_factor": 0.19,
+                "unit": "passenger_km",
+                "source": "DEFRA 2023",
+                "methodology": "Average aircraft",
+                "gwp_ar5": true,
+                "region": "GLOBAL",
+                "year": 2023
+              }
+            ],
+            "material": [
+              {
+                "id": "mock-12",
+                "category": "material",
+                "subcategory": "steel",
+                "scope": 3,
+                "emission_factor": 2.89,
+                "unit": "kg",
+                "source": "DEFRA 2023",
+                "methodology": "Cradle-to-gate",
+                "gwp_ar5": true,
+                "region": "GLOBAL",
+                "year": 2023
+              },
+              {
+                "id": "mock-13",
+                "category": "material",
+                "subcategory": "aluminum",
+                "scope": 3,
+                "emission_factor": 11.46,
+                "unit": "kg",
+                "source": "DEFRA 2023",
+                "methodology": "Cradle-to-gate",
+                "gwp_ar5": true,
+                "region": "GLOBAL",
+                "year": 2023
+              },
+              {
+                "id": "mock-14",
+                "category": "material",
+                "subcategory": "concrete",
+                "scope": 3,
+                "emission_factor": 0.13,
+                "unit": "kg",
+                "source": "DEFRA 2023",
+                "methodology": "Cradle-to-gate",
+                "gwp_ar5": true,
+                "region": "GLOBAL",
+                "year": 2023
+              }
+            ]
+          }
+        },
+        "total": 5,
+        "note": "Using mock data - emission_factors table not found. Please run setup-carbon-calculator.sql"
+      },
+      "hasData": true
+    },
+    {
+      "test": "Emission Factors Categories",
+      "path": "/api/carbon-calculator/emission-factors",
+      "method": "POST",
+      "status": 200,
+      "success": true,
+      "error": null,
+      "data": {
+        "scopes": {
+          "1": {
+            "name": "Scope 1 - Direct Emissions",
+            "categories": {
+              "fuel": {
+                "name": "Fuels & Combustion",
+                "subcategories": [
+                  {
+                    "value": "natural_gas_commercial",
+                    "label": "Natural Gas Commercial",
+                    "unit": "MMBtu"
+                  },
+                  {
+                    "value": "gasoline_motor",
+                    "label": "Gasoline Motor",
+                    "unit": "gallon"
+                  },
+                  {
+                    "value": "diesel_fuel",
+                    "label": "Diesel Fuel",
+                    "unit": "gallon"
+                  },
+                  {
+                    "value": "propane",
+                    "label": "Propane",
+                    "unit": "gallon"
+                  }
+                ]
+              },
+              "transport": {
+                "name": "Transportation",
+                "subcategories": [
+                  {
+                    "value": "passenger_car_gasoline",
+                    "label": "Passenger Car Gasoline",
+                    "unit": "gallon"
+                  }
+                ]
+              }
+            }
+          },
+          "2": {
+            "name": "Scope 2 - Indirect Energy",
+            "categories": {
+              "electricity": {
+                "name": "Electricity",
+                "subcategories": [
+                  {
+                    "value": "grid_us_national",
+                    "label": "Grid US National",
+                    "unit": "kWh"
+                  },
+                  {
+                    "value": "grid_california",
+                    "label": "Grid California",
+                    "unit": "kWh"
+                  },
+                  {
+                    "value": "grid_texas",
+                    "label": "Grid Texas",
+                    "unit": "kWh"
+                  },
+                  {
+                    "value": "grid_uk",
+                    "label": "Grid UK",
+                    "unit": "kWh"
+                  }
+                ]
+              }
+            }
+          },
+          "3": {
+            "name": "Scope 3 - Other Indirect",
+            "categories": {
+              "transport": {
+                "name": "Transportation",
+                "subcategories": [
+                  {
+                    "value": "air_domestic_short",
+                    "label": "Air Domestic Short",
+                    "unit": "passenger_km"
+                  },
+                  {
+                    "value": "air_international_long",
+                    "label": "Air International Long",
+                    "unit": "passenger_km"
+                  }
+                ]
+              },
+              "material": {
+                "name": "Materials & Products",
+                "subcategories": [
+                  {
+                    "value": "steel",
+                    "label": "Steel",
+                    "unit": "kg"
+                  },
+                  {
+                    "value": "aluminum",
+                    "label": "Aluminum",
+                    "unit": "kg"
+                  },
+                  {
+                    "value": "concrete",
+                    "label": "Concrete",
+                    "unit": "kg"
+                  }
+                ]
+              },
+              "waste": {
+                "name": "Waste Management",
+                "subcategories": [
+                  {
+                    "value": "general_waste_landfill",
+                    "label": "General Waste Landfill",
+                    "unit": "kg"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "hasData": true
+    },
+    {
+      "test": "Carbon Assessment Create",
+      "path": "/api/carbon-calculator/assessments",
+      "method": "POST",
+      "status": 201,
+      "success": true,
+      "error": null,
+      "data": {
+        "message": "Assessment created successfully (demo mode)",
+        "assessment": {
+          "id": "assessment-1752172880832-p780yt46r",
+          "organization_name": "Test Corp",
+          "assessment_year": 2024,
+          "reporting_period_start": "2025-07-10",
+          "reporting_period_end": "2025-12-30",
+          "boundary_description": "Organizational",
+          "verification_status": "draft",
+          "user_id": null,
+          "created_at": "2025-07-10T18:41:20.832Z",
+          "updated_at": "2025-07-10T18:41:20.832Z",
+          "total_scope1": 0,
+          "total_scope2": 0,
+          "total_scope3": 0,
+          "total_emissions": 0
+        },
+        "note": "Demo mode - carbon_assessments table not available"
+      },
+      "hasData": true
+    },
+    {
+      "test": "Carbon Calculate",
+      "path": "/api/carbon-calculator/calculate",
+      "method": "POST",
+      "status": 200,
+      "success": true,
+      "error": null,
+      "data": {
+        "assessmentId": null,
+        "summary": {
+          "scope1Total": 5.3,
+          "scope2Total": 0,
+          "scope3Total": 0,
+          "totalEmissions": 5.3,
+          "averageConfidence": 90,
+          "emissionsByScope": {
+            "scope1": 100,
+            "scope2": 0,
+            "scope3": 0
+          }
+        },
+        "details": {
+          "scope1Results": [
+            {
+              "co2Emissions": 5.19596,
+              "ch4Emissions": 0.053020000000000005,
+              "n2oEmissions": 0.053020000000000005,
+              "otherGhgEmissions": 0,
+              "totalEmissions": 5.302,
+              "emissionFactor": 53.02,
+              "emissionFactorSource": "EPA 2023",
+              "confidenceLevel": 90
+            }
+          ],
+          "scope2Results": [],
+          "scope3Results": []
+        },
+        "insights": [
+          {
+            "type": "scope_distribution",
+            "message": "Scope 1 (direct) emissions are significant. Consider fuel switching or efficiency improvements.",
+            "priority": "medium"
+          }
+        ],
+        "recommendations": []
+      },
+      "hasData": true
+    },
+    {
+      "test": "Projects List",
+      "path": "/api/projects",
+      "method": "GET",
+      "status": 200,
+      "success": true,
+      "error": null,
+      "data": {
+        "projects": [
+          {
+            "id": "e56dca5f-d926-4638-8146-d91749c266d9",
+            "name": "Wind Energy Project Kenya",
+            "description": "Large wind farm installation providing renewable energy to the national grid. Supports Kenya's transition to clean energy.",
+            "location": "Turkana, Kenya",
+            "project_type": "renewable_energy",
+            "certification": "CARBON_CREDIT_STANDARD",
+            "total_credits": 30000,
+            "available_credits": 22000,
+            "price_per_credit": 22.25,
+            "vintage_year": 2024,
+            "status": "active",
+            "created_at": "2025-07-10T15:10:45.517663+00:00",
+            "updated_at": "2025-07-10T15:10:45.517663+00:00"
+          },
+          {
+            "id": "4e583d4f-c9df-435e-bf2d-1e065863a66a",
+            "name": "Energy Efficiency Buildings",
+            "description": "Commercial building energy efficiency retrofit program reducing energy consumption by 40%.",
+            "location": "Toronto, Canada",
+            "project_type": "energy_efficiency",
+            "certification": "GOLD_STANDARD",
+            "total_credits": 8000,
+            "available_credits": 6500,
+            "price_per_credit": 35,
+            "vintage_year": 2024,
+            "status": "active",
+            "created_at": "2025-07-10T15:10:45.517663+00:00",
+            "updated_at": "2025-07-10T15:10:45.517663+00:00"
+          }
+        ],
+        "pagination": {
+          "total": 2,
+          "limit": 20,
+          "offset": 0,
+          "has_more": false
+        },
+        "filters_applied": {
+          "project_type": null,
+          "certification": null,
+          "status": "active",
+          "min_price": null,
+          "max_price": null,
+          "location": null,
+          "search": null,
+          "sort_by": "created_at",
+          "sort_order": "desc"
+        }
+      },
+      "hasData": true
+    },
+    {
+      "test": "Projects Create",
+      "path": "/api/projects",
+      "method": "POST",
+      "status": 201,
+      "success": true,
+      "error": null,
+      "data": {
+        "message": "Project created successfully (demo mode)",
+        "project": {
+          "id": "project-1752172881783-wx8hxb9pb",
+          "name": "Test Project",
+          "description": "Test",
+          "location": "Global",
+          "project_type": "reforestation",
+          "certification": "VERRA",
+          "total_credits": 1000,
+          "available_credits": 1000,
+          "price_per_credit": 25,
+          "vintage_year": 2025,
+          "status": "draft",
+          "verification_status": "not_submitted",
+          "seller_id": null,
+          "created_at": "2025-07-10T18:41:21.783Z",
+          "updated_at": "2025-07-10T18:41:21.783Z"
+        },
+        "note": "Demo mode - projects table not available"
+      },
+      "hasData": true
+    },
+    {
+      "test": "Cart Get",
+      "path": "/api/cart",
+      "method": "GET",
+      "status": 200,
+      "success": true,
+      "error": null,
+      "data": {
+        "cartItems": [
+          {
+            "id": "demo-item-1",
+            "project_id": "demo-project-1",
+            "project_name": "Amazon Reforestation Project",
+            "quantity": 10,
+            "unit_price": 25,
+            "total_price": 250,
+            "project_type": "reforestation",
+            "vintage_year": 2024,
+            "certification": "VERRA"
+          }
+        ],
+        "note": "Demo cart - sign in to manage your actual cart"
+      },
+      "hasData": true
+    },
+    {
+      "test": "Cart Add Item",
+      "path": "/api/cart",
+      "method": "POST",
+      "status": 200,
+      "success": true,
+      "error": null,
+      "data": {
+        "message": "Item added to demo cart",
+        "cartItem": {
+          "id": "6048507e-d860-4954-b5cb-5f5b03509246",
+          "project_id": "test-project",
+          "project_name": "Demo Project",
+          "quantity": 10,
+          "unit_price": 25,
+          "total_price": 250
+        },
+        "note": "Demo mode - sign in to manage your actual cart"
+      },
+      "hasData": true
+    },
+    {
+      "test": "Checkout Initialize",
+      "path": "/api/checkout",
+      "method": "POST",
+      "status": 200,
+      "success": true,
+      "error": null,
+      "data": {
+        "success": true,
+        "checkout_session": {
+          "id": "demo-checkout-1752172882077",
+          "subtotal": 250,
+          "tax": 20,
+          "processing_fee": 6.25,
+          "total": 276.25,
+          "items": [
+            {
+              "project_id": "test-project",
+              "quantity": 10
+            }
+          ]
+        },
+        "message": "Demo checkout session initialized",
+        "note": "Demo mode - sign in to complete actual purchases"
+      },
+      "hasData": true
+    },
+    {
+      "test": "Seller Dashboard",
+      "path": "/api/seller",
+      "method": "GET",
+      "status": 200,
+      "success": true,
+      "error": null,
+      "data": {
+        "message": "Seller dashboard (demo mode)",
+        "projects": [
+          {
+            "id": "demo-project-1",
+            "name": "Amazon Reforestation Project",
+            "status": "active",
+            "total_credits": 1000,
+            "available_credits": 750,
+            "price_per_credit": 25,
+            "created_at": "2025-07-10T18:41:22.225Z"
+          }
+        ],
+        "revenue_summary": {
+          "total_revenue": 6250,
+          "total_credits_sold": 250,
+          "transaction_count": 15,
+          "average_price": 25
+        },
+        "note": "Demo mode - seller dashboard data"
+      },
+      "hasData": true
+    },
+    {
+      "test": "Seller Project Submit",
+      "path": "/api/seller",
+      "method": "POST",
+      "status": 200,
+      "success": true,
+      "error": null,
+      "data": {
+        "message": "Project submitted for verification (demo mode)",
+        "project": {
+          "id": "test-project",
+          "status": "pending_verification",
+          "verification_status": "submitted",
+          "updated_at": "2025-07-10T18:41:22.253Z"
+        },
+        "note": "Demo mode - verification queue not available"
+      },
+      "hasData": true
+    },
+    {
+      "test": "Verifier Queue",
+      "path": "/api/verifier",
+      "method": "GET",
+      "status": 200,
+      "success": true,
+      "error": null,
+      "data": {
+        "message": "Verifier queue (demo mode)",
+        "queue": [
+          {
+            "id": "verification-1",
+            "project_id": "project-1",
+            "status": "pending",
+            "priority": "high",
+            "created_at": "2025-07-10T18:41:22.400Z",
+            "projects": {
+              "id": "project-1",
+              "name": "Amazon Reforestation Project",
+              "description": "Large scale reforestation initiative",
+              "location": "Brazil",
+              "project_type": "reforestation",
+              "certification": "VERRA",
+              "total_credits": 5000,
+              "price_per_credit": 28.5
+            }
+          }
+        ],
+        "note": "Demo mode - verifications table not available"
+      },
+      "hasData": true
+    },
+    {
+      "test": "Verifier Review",
+      "path": "/api/verifier",
+      "method": "POST",
+      "status": 200,
+      "success": true,
+      "error": null,
+      "data": {
+        "message": "Project review completed (demo mode)",
+        "verification": {
+          "id": "test-verification",
+          "status": "reviewed",
+          "reviewer_comments": "Review completed",
+          "review_date": "2025-07-10T18:41:22.431Z"
+        },
+        "note": "Demo mode - verifications table not available"
+      },
+      "hasData": true
+    },
+    {
+      "test": "Database Test Detailed",
+      "path": "/api/test-db-detailed",
+      "method": "GET",
+      "status": 200,
+      "success": true,
+      "error": null,
+      "data": {
+        "timestamp": "2025-07-10T18:41:22.566Z",
+        "tests": {
+          "database_connection": {
+            "status": "PASSED",
+            "message": "Database connection successful",
+            "data": {
+              "count": 6
+            }
+          },
+          "projects_table": {
+            "status": "PASSED",
+            "message": "Found 5 projects",
+            "data": [
+              {
+                "id": "640117e1-ffb6-4d19-8015-9c44fb293901",
+                "name": "Amazon Rainforest Conservation",
+                "status": "verified",
+                "created_at": "2025-07-10T15:10:45.517663+00:00"
+              },
+              {
+                "id": "8ffeba77-194c-4468-ba96-ffa4683f1aed",
+                "name": "Solar Farm Initiative India",
+                "status": "verified",
+                "created_at": "2025-07-10T15:10:45.517663+00:00"
+              },
+              {
+                "id": "8bac4970-9022-4364-9947-a2aa34cb82eb",
+                "name": "Mangrove Restoration Philippines",
+                "status": "verified",
+                "created_at": "2025-07-10T15:10:45.517663+00:00"
+              }
+            ]
+          },
+          "verifications_table": {
+            "status": "PASSED",
+            "message": "Found 0 verifications",
+            "data": []
+          },
+          "transactions_table": {
+            "status": "PASSED",
+            "message": "Found 0 transactions",
+            "data": []
+          },
+          "cart_items_table": {
+            "status": "PASSED",
+            "message": "Found 0 cart items",
+            "data": []
+          },
+          "certificates_table": {
+            "status": "PASSED",
+            "message": "Found 0 certificates",
+            "data": []
+          },
+          "activity_logs_table": {
+            "status": "PASSED",
+            "message": "Found 0 activity logs",
+            "data": []
+          },
+          "project_documents_table": {
+            "status": "PASSED",
+            "message": "Found 0 project documents",
+            "data": []
+          },
+          "join_query_test": {
+            "status": "PASSED",
+            "message": "Join query successful - 3 projects with verifications",
+            "data": [
+              {
+                "id": "640117e1-ffb6-4d19-8015-9c44fb293901",
+                "name": "Amazon Rainforest Conservation",
+                "status": "verified",
+                "verifications": []
+              },
+              {
+                "id": "8ffeba77-194c-4468-ba96-ffa4683f1aed",
+                "name": "Solar Farm Initiative India",
+                "status": "verified",
+                "verifications": []
+              },
+              {
+                "id": "8bac4970-9022-4364-9947-a2aa34cb82eb",
+                "name": "Mangrove Restoration Philippines",
+                "status": "verified",
+                "verifications": []
+              }
+            ]
+          },
+          "insert_test": {
+            "status": "PASSED",
+            "message": "Insert operation successful",
+            "data": {
+              "id": "a9c13660-297a-4d09-b99c-01c6e758ce92",
+              "user_id": null,
+              "activity_type": "database_test",
+              "description": "Database connectivity test performed",
+              "metadata": {
+                "test_timestamp": "2025-07-10T18:41:23.707Z"
+              },
+              "project_id": null,
+              "transaction_id": null,
+              "created_at": "2025-07-10T18:41:23.707+00:00"
+            }
+          }
+        },
+        "summary": {
+          "total": 10,
+          "passed": 10,
+          "failed": 0
+        },
+        "overall_status": "ALL_PASSED",
+        "success_rate": "100%"
+      },
+      "hasData": true
+    },
+    {
+      "test": "Setup Tables",
+      "path": "/api/setup-tables",
+      "method": "POST",
+      "status": 200,
+      "success": true,
+      "error": null,
+      "data": {
+        "timestamp": "2025-07-10T18:41:24.131Z",
+        "operations": [
+          {
+            "operation": "create_emission_factors_table_sql",
+            "status": "FAILED",
+            "message": "SQL execution failed: Could not find the function public.exec_sql(query) in the schema cache. Will use manual data insertion."
+          },
+          {
+            "operation": "provide_manual_setup",
+            "status": "MANUAL_SETUP_REQUIRED",
+            "message": "emission_factors table needs manual creation",
+            "manual_setup": {
+              "sql_file": "scripts/setup-carbon-calculator.sql",
+              "instructions": [
+                "1. Go to Supabase dashboard -> SQL Editor",
+                "2. Copy and execute scripts/setup-carbon-calculator.sql",
+                "3. Or use the sample data provided below for testing"
+              ],
+              "sample_data": [
+                {
+                  "category": "fuel",
+                  "subcategory": "natural_gas_commercial",
+                  "scope": 1,
+                  "emission_factor": 53.02,
+                  "unit": "MMBtu",
+                  "source": "EPA 2023",
+                  "methodology": "AP-42",
+                  "region": "US"
+                },
+                {
+                  "category": "fuel",
+                  "subcategory": "gasoline_motor",
+                  "scope": 1,
+                  "emission_factor": 19.59,
+                  "unit": "gallon",
+                  "source": "EPA 2023",
+                  "methodology": "AP-42",
+                  "region": "US"
+                },
+                {
+                  "category": "fuel",
+                  "subcategory": "diesel_fuel",
+                  "scope": 1,
+                  "emission_factor": 22.51,
+                  "unit": "gallon",
+                  "source": "EPA 2023",
+                  "methodology": "AP-42",
+                  "region": "US"
+                },
+                {
+                  "category": "electricity",
+                  "subcategory": "grid_us_national",
+                  "scope": 2,
+                  "emission_factor": 0.8554,
+                  "unit": "kWh",
+                  "source": "EPA eGRID 2021",
+                  "methodology": "Location-based",
+                  "region": "US"
+                },
+                {
+                  "category": "electricity",
+                  "subcategory": "grid_california",
+                  "scope": 2,
+                  "emission_factor": 0.4578,
+                  "unit": "kWh",
+                  "source": "EPA eGRID 2021",
+                  "methodology": "Location-based",
+                  "region": "US"
+                },
+                {
+                  "category": "transport",
+                  "subcategory": "air_domestic_short",
+                  "scope": 3,
+                  "emission_factor": 0.24,
+                  "unit": "passenger_km",
+                  "source": "DEFRA 2023",
+                  "methodology": "Average aircraft",
+                  "region": "GLOBAL"
+                },
+                {
+                  "category": "material",
+                  "subcategory": "steel",
+                  "scope": 3,
+                  "emission_factor": 2.89,
+                  "unit": "kg",
+                  "source": "DEFRA 2023",
+                  "methodology": "Cradle-to-gate",
+                  "region": "GLOBAL"
+                }
+              ]
+            }
+          }
+        ],
+        "summary": {
+          "total": 1,
+          "success": 0,
+          "failed": 1
+        }
+      },
+      "hasData": true
+    }
+  ],
+  "frontend_results": [
+    {
+      "route": "/",
+      "status": 200,
+      "success": true,
+      "isHTML": true,
+      "hasContent": true,
+      "error": null,
+      "size": 61417
+    },
+    {
+      "route": "/calculator",
+      "status": 200,
+      "success": true,
+      "isHTML": true,
+      "hasContent": true,
+      "error": null,
+      "size": 26137
+    },
+    {
+      "route": "/marketplace",
+      "status": 200,
+      "success": true,
+      "isHTML": true,
+      "hasContent": true,
+      "error": null,
+      "size": 33800
+    },
+    {
+      "route": "/dashboard",
+      "status": 200,
+      "success": true,
+      "isHTML": true,
+      "hasContent": true,
+      "error": null,
+      "size": 24268
+    },
+    {
+      "route": "/auth/signin",
+      "status": 200,
+      "success": true,
+      "isHTML": true,
+      "hasContent": true,
+      "error": null,
+      "size": 13042
+    },
+    {
+      "route": "/auth/signup",
+      "status": 200,
+      "success": true,
+      "isHTML": true,
+      "hasContent": true,
+      "error": null,
+      "size": 16602
+    },
+    {
+      "route": "/checkout",
+      "status": 200,
+      "success": true,
+      "isHTML": true,
+      "hasContent": true,
+      "error": null,
+      "size": 8845
+    },
+    {
+      "route": "/retire-credits",
+      "status": 200,
+      "success": true,
+      "isHTML": true,
+      "hasContent": true,
+      "error": null,
+      "size": 9014
+    },
+    {
+      "route": "/seller/dashboard",
+      "status": 200,
+      "success": true,
+      "isHTML": true,
+      "hasContent": true,
+      "error": null,
+      "size": 9676
+    },
+    {
+      "route": "/seller/register-project",
+      "status": 200,
+      "success": true,
+      "isHTML": true,
+      "hasContent": true,
+      "error": null,
+      "size": 20830
+    },
+    {
+      "route": "/verifier/queue",
+      "status": 200,
+      "success": true,
+      "isHTML": true,
+      "hasContent": true,
+      "error": null,
+      "size": 9660
+    },
+    {
+      "route": "/test-dashboard",
+      "status": 200,
+      "success": true,
+      "isHTML": true,
+      "hasContent": true,
+      "error": null,
+      "size": 16589
+    }
+  ],
+  "missing_endpoints": [],
+  "error_endpoints": [],
+  "auth_required": []
+}
