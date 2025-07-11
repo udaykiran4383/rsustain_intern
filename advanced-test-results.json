@@ -1,0 +1,414 @@
+{
+  "performance_tests": [
+    {
+      "test": "High Load API Stress Test",
+      "type": "stress",
+      "totalRequests": 750,
+      "successCount": 750,
+      "successRate": 100,
+      "expectedSuccessRate": 95,
+      "passed": true,
+      "duration": 5000
+    },
+    {
+      "test": "Database Connection Pool Test",
+      "type": "stress",
+      "totalRequests": 45,
+      "successCount": 45,
+      "successRate": 100,
+      "expectedSuccessRate": 90,
+      "passed": true,
+      "duration": 3000
+    },
+    {
+      "test": "Memory Intensive Calculation Test",
+      "type": "performance",
+      "totalRequests": 328,
+      "successCount": 328,
+      "successRate": 100,
+      "expectedSuccessRate": 100,
+      "passed": true,
+      "duration": 4000
+    },
+    {
+      "test": "Large Project List Performance",
+      "type": "performance",
+      "totalRequests": 104,
+      "successCount": 104,
+      "successRate": 100,
+      "expectedSuccessRate": 100,
+      "passed": true,
+      "duration": 3000
+    }
+  ],
+  "data_integrity_tests": [
+    {
+      "test": "Assessment Data Consistency",
+      "type": "data_integrity",
+      "steps": [
+        {
+          "action": "create_assessment",
+          "status": 201,
+          "passed": true,
+          "data": {
+            "message": "Assessment created successfully (demo mode)",
+            "assessment": {
+              "id": "assessment-1752174817756-o8oae7i9t",
+              "organization_name": "Data Test Corp",
+              "assessment_year": 2024,
+              "reporting_period_start": "2025-07-10",
+              "reporting_period_end": "2025-12-30",
+              "boundary_description": "Organizational",
+              "verification_status": "draft",
+              "user_id": null,
+              "created_at": "2025-07-10T19:13:37.756Z",
+              "updated_at": "2025-07-10T19:13:37.756Z",
+              "total_scope1": 0,
+              "total_scope2": 0,
+              "total_scope3": 0,
+              "total_emissions": 0
+            },
+            "note": "Demo mode - carbon_assessments table not available"
+          }
+        },
+        {
+          "action": "verify_assessment_data",
+          "status": 401,
+          "passed": false,
+          "data": {
+            "error": "Unauthorized"
+          }
+        }
+      ],
+      "passed": false
+    },
+    {
+      "test": "Cart State Persistence",
+      "type": "data_integrity",
+      "steps": [
+        {
+          "action": "add_item_1",
+          "status": 200,
+          "passed": true,
+          "data": {
+            "message": "Item added to demo cart",
+            "cartItem": {
+              "id": "cart-item-1752174818275-z62qhlacn",
+              "project_id": "test-proj-1",
+              "project_name": "Demo Project",
+              "quantity": 5,
+              "unit_price": 25,
+              "total_price": 125
+            },
+            "note": "Demo mode - sign in to manage your actual cart"
+          }
+        },
+        {
+          "action": "add_item_2",
+          "status": 200,
+          "passed": true,
+          "data": {
+            "message": "Item added to demo cart",
+            "cartItem": {
+              "id": "cart-item-1752174818283-wgedyiruc",
+              "project_id": "test-proj-2",
+              "project_name": "Demo Project",
+              "quantity": 3,
+              "unit_price": 25,
+              "total_price": 75
+            },
+            "note": "Demo mode - sign in to manage your actual cart"
+          }
+        },
+        {
+          "action": "verify_cart_contents",
+          "status": 200,
+          "passed": true,
+          "data": {
+            "cartItems": [
+              {
+                "id": "demo-item-1",
+                "project_id": "demo-project-1",
+                "project_name": "Amazon Reforestation Project",
+                "quantity": 10,
+                "unit_price": 25,
+                "total_price": 250,
+                "project_type": "reforestation",
+                "vintage_year": 2024,
+                "certification": "VERRA"
+              }
+            ],
+            "note": "Demo cart - sign in to manage your actual cart"
+          }
+        }
+      ],
+      "passed": true
+    },
+    {
+      "test": "Project Creation Data Validation",
+      "type": "data_integrity",
+      "steps": [
+        {
+          "action": "create_project_with_data",
+          "status": 201,
+          "passed": true,
+          "data": {
+            "message": "Project created successfully (demo mode)",
+            "project": {
+              "id": "project-1752174818812-hrufjsgoj",
+              "name": "Data Validation Project",
+              "description": "Testing data integrity",
+              "location": "Global",
+              "project_type": "reforestation",
+              "certification": "VERRA",
+              "total_credits": 1000,
+              "available_credits": 1000,
+              "price_per_credit": 25.5,
+              "vintage_year": 2025,
+              "status": "draft",
+              "verification_status": "not_submitted",
+              "seller_id": null,
+              "created_at": "2025-07-10T19:13:38.812Z",
+              "updated_at": "2025-07-10T19:13:38.812Z"
+            },
+            "note": "Demo mode - projects table not available"
+          }
+        },
+        {
+          "action": "verify_project_creation",
+          "status": 200,
+          "passed": true,
+          "data": {
+            "projects": [
+              {
+                "id": "e56dca5f-d926-4638-8146-d91749c266d9",
+                "name": "Wind Energy Project Kenya",
+                "description": "Large wind farm installation providing renewable energy to the national grid. Supports Kenya's transition to clean energy.",
+                "location": "Turkana, Kenya",
+                "project_type": "renewable_energy",
+                "certification": "CARBON_CREDIT_STANDARD",
+                "total_credits": 30000,
+                "available_credits": 22000,
+                "price_per_credit": 22.25,
+                "vintage_year": 2024,
+                "status": "active",
+                "created_at": "2025-07-10T15:10:45.517663+00:00",
+                "updated_at": "2025-07-10T15:10:45.517663+00:00"
+              },
+              {
+                "id": "4e583d4f-c9df-435e-bf2d-1e065863a66a",
+                "name": "Energy Efficiency Buildings",
+                "description": "Commercial building energy efficiency retrofit program reducing energy consumption by 40%.",
+                "location": "Toronto, Canada",
+                "project_type": "energy_efficiency",
+                "certification": "GOLD_STANDARD",
+                "total_credits": 8000,
+                "available_credits": 6500,
+                "price_per_credit": 35,
+                "vintage_year": 2024,
+                "status": "active",
+                "created_at": "2025-07-10T15:10:45.517663+00:00",
+                "updated_at": "2025-07-10T15:10:45.517663+00:00"
+              }
+            ],
+            "pagination": {
+              "total": 2,
+              "limit": 20,
+              "offset": 0,
+              "has_more": false
+            },
+            "filters_applied": {
+              "project_type": null,
+              "certification": null,
+              "status": "active",
+              "min_price": null,
+              "max_price": null,
+              "location": null,
+              "search": null,
+              "sort_by": "created_at",
+              "sort_order": "desc"
+            }
+          }
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "security_tests": [
+    {
+      "test": "API Rate Limiting Test",
+      "type": "security",
+      "rateLimited": false,
+      "passed": true
+    },
+    {
+      "test": "Large Payload DOS Test",
+      "type": "security",
+      "status": 201,
+      "expected": [
+        200,
+        201,
+        400,
+        413,
+        500
+      ],
+      "passed": true
+    },
+    {
+      "test": "Header Injection Test",
+      "type": "security",
+      "status": 200,
+      "expected": [
+        200,
+        400,
+        403
+      ],
+      "passed": true
+    },
+    {
+      "test": "Invalid JSON Parsing Test",
+      "type": "security",
+      "status": 500,
+      "expected": [
+        400
+      ],
+      "passed": false
+    },
+    {
+      "test": "Null Byte Injection Test",
+      "type": "security",
+      "status": 201,
+      "expected": [
+        200,
+        201,
+        400
+      ],
+      "passed": true
+    }
+  ],
+  "error_recovery_tests": [],
+  "real_world_tests": [
+    {
+      "test": "Multi-User Shopping Workflow",
+      "type": "real_world",
+      "users": 5,
+      "totalSteps": 15,
+      "successfulSteps": 15,
+      "successRate": 100,
+      "passed": true
+    },
+    {
+      "test": "Large Scale Carbon Assessment",
+      "type": "real_world",
+      "results": [
+        {
+          "testCase": "natural_gas",
+          "status": 200,
+          "success": true,
+          "emissions": 2651
+        },
+        {
+          "testCase": "gasoline",
+          "status": 200,
+          "success": true,
+          "emissions": 195.9
+        },
+        {
+          "testCase": "diesel",
+          "status": 200,
+          "success": true,
+          "emissions": 180.08
+        }
+      ],
+      "passed": true
+    },
+    {
+      "test": "Seller Project Management Workflow",
+      "type": "real_world",
+      "steps": [
+        {
+          "action": "create_project",
+          "status": 201,
+          "passed": true,
+          "data": {
+            "message": "Project created successfully (demo mode)",
+            "project": {
+              "id": "project-1752174825542-vp0529tlb",
+              "name": "Large Scale Project",
+              "description": "Major reforestation initiative",
+              "location": "Global",
+              "project_type": "reforestation",
+              "certification": "VERRA",
+              "total_credits": 50000,
+              "available_credits": 50000,
+              "price_per_credit": 28.75,
+              "vintage_year": 2025,
+              "status": "draft",
+              "verification_status": "not_submitted",
+              "seller_id": null,
+              "created_at": "2025-07-10T19:13:45.543Z",
+              "updated_at": "2025-07-10T19:13:45.543Z"
+            },
+            "note": "Demo mode - projects table not available"
+          }
+        },
+        {
+          "action": "submit_for_verification",
+          "status": 200,
+          "passed": true,
+          "data": {
+            "message": "Project submitted for verification (demo mode)",
+            "project": {
+              "id": "large-project",
+              "status": "pending_verification",
+              "verification_status": "submitted",
+              "updated_at": "2025-07-10T19:13:45.777Z"
+            },
+            "note": "Demo mode - verification queue not available"
+          }
+        },
+        {
+          "action": "verifier_review",
+          "status": 200,
+          "passed": true,
+          "data": {
+            "message": "Project review completed (demo mode)",
+            "verification": {
+              "id": "large-verification",
+              "status": "reviewed",
+              "reviewer_comments": "Comprehensive review completed",
+              "review_date": "2025-07-10T19:13:45.929Z"
+            },
+            "note": "Demo mode - verifications table not available"
+          }
+        },
+        {
+          "action": "check_final_status",
+          "status": 200,
+          "passed": true,
+          "data": [
+            {
+              "id": "demo-project-1",
+              "name": "Amazon Reforestation Project",
+              "description": "Large scale reforestation initiative",
+              "status": "active",
+              "verification_status": "approved",
+              "total_credits": 1000,
+              "available_credits": 750,
+              "price_per_credit": 25,
+              "created_at": "2025-07-10T19:13:46.060Z",
+              "verifications": [
+                {
+                  "status": "approved",
+                  "priority": "high",
+                  "created_at": "2025-07-10T19:13:46.060Z"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "passed": true
+    }
+  ]
+}

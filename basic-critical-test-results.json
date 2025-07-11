@@ -1,0 +1,600 @@
+{
+  "data_consistency": [
+    {
+      "test": "Database Schema Validation",
+      "type": "schema_validation",
+      "results": [
+        {
+          "endpoint": "/api/test-db",
+          "description": "Basic database connectivity",
+          "status": 200,
+          "has_data": true,
+          "passed": true
+        },
+        {
+          "endpoint": "/api/test-db-detailed",
+          "description": "Detailed database structure",
+          "status": 200,
+          "has_data": true,
+          "passed": true
+        },
+        {
+          "endpoint": "/api/carbon-calculator/emission-factors",
+          "description": "Emission factors table",
+          "status": 200,
+          "has_data": true,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "test": "Data Persistence Validation",
+      "type": "data_persistence",
+      "results": [
+        {
+          "step": "create_project",
+          "endpoint": "/api/projects",
+          "status": 201,
+          "data_valid": true,
+          "passed": true
+        },
+        {
+          "step": "verify_project_exists",
+          "endpoint": "/api/projects",
+          "status": 200,
+          "data_valid": true,
+          "passed": true
+        },
+        {
+          "step": "create_cart_item",
+          "endpoint": "/api/cart",
+          "status": 200,
+          "data_valid": true,
+          "passed": true
+        },
+        {
+          "step": "verify_cart_persistence",
+          "endpoint": "/api/cart",
+          "status": 200,
+          "data_valid": true,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "test": "Assessment Data Lifecycle",
+      "type": "assessment_lifecycle",
+      "results": [
+        {
+          "step": "create_assessment",
+          "endpoint": "/api/carbon-calculator/assessments",
+          "status": 201,
+          "data_valid": true,
+          "passed": true
+        },
+        {
+          "step": "add_calculation_to_assessment",
+          "endpoint": "/api/carbon-calculator/calculate",
+          "status": 200,
+          "data_valid": true,
+          "passed": true
+        },
+        {
+          "step": "retrieve_assessment",
+          "endpoint": "/api/carbon-calculator/assessments",
+          "status": 200,
+          "data_valid": "Demo mode - sign in to access your actual assessments",
+          "passed": "Demo mode - sign in to access your actual assessments"
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "crud_operations": [
+    {
+      "test": "Projects CRUD Operations",
+      "type": "crud_projects",
+      "results": [
+        {
+          "operation": "CREATE",
+          "endpoint": "/api/projects",
+          "expected_status": [
+            200,
+            201
+          ],
+          "actual_status": 201,
+          "status_passed": true,
+          "validation_passed": true,
+          "passed": true
+        },
+        {
+          "operation": "READ",
+          "endpoint": "/api/projects",
+          "expected_status": [
+            200
+          ],
+          "actual_status": 200,
+          "status_passed": true,
+          "validation_passed": true,
+          "passed": true
+        },
+        {
+          "operation": "UPDATE",
+          "endpoint": "/api/projects",
+          "expected_status": [
+            200,
+            201,
+            404
+          ],
+          "actual_status": 200,
+          "status_passed": true,
+          "validation_passed": true,
+          "passed": true
+        },
+        {
+          "operation": "DELETE",
+          "endpoint": "/api/projects",
+          "expected_status": [
+            200,
+            201,
+            404
+          ],
+          "actual_status": 200,
+          "status_passed": true,
+          "validation_passed": true,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "test": "Cart CRUD Operations",
+      "type": "crud_cart",
+      "results": [
+        {
+          "operation": "ADD_ITEM",
+          "endpoint": "/api/cart",
+          "expected_status": [
+            200,
+            201
+          ],
+          "actual_status": 200,
+          "status_passed": true,
+          "validation_passed": true,
+          "passed": true
+        },
+        {
+          "operation": "VIEW_CART",
+          "endpoint": "/api/cart",
+          "expected_status": [
+            200
+          ],
+          "actual_status": 200,
+          "status_passed": true,
+          "validation_passed": true,
+          "passed": true
+        },
+        {
+          "operation": "UPDATE_ITEM",
+          "endpoint": "/api/cart",
+          "expected_status": [
+            200,
+            201,
+            404
+          ],
+          "actual_status": 200,
+          "status_passed": true,
+          "validation_passed": true,
+          "passed": true
+        },
+        {
+          "operation": "REMOVE_ITEM",
+          "endpoint": "/api/cart",
+          "expected_status": [
+            200,
+            201,
+            404
+          ],
+          "actual_status": 200,
+          "status_passed": true,
+          "validation_passed": true,
+          "passed": true
+        },
+        {
+          "operation": "CLEAR_CART",
+          "endpoint": "/api/cart",
+          "expected_status": [
+            200,
+            201
+          ],
+          "actual_status": 200,
+          "status_passed": true,
+          "validation_passed": true,
+          "passed": true
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "input_validation": [
+    {
+      "test": "Required Fields Validation",
+      "type": "required_fields",
+      "results": [
+        {
+          "description": "Missing fuelType",
+          "endpoint": "/api/carbon-calculator/calculate",
+          "expected_status": [
+            400
+          ],
+          "actual_status": 400,
+          "passed": true
+        },
+        {
+          "description": "Missing consumption",
+          "endpoint": "/api/carbon-calculator/calculate",
+          "expected_status": [
+            400
+          ],
+          "actual_status": 400,
+          "passed": true
+        },
+        {
+          "description": "Missing unit",
+          "endpoint": "/api/carbon-calculator/calculate",
+          "expected_status": [
+            400
+          ],
+          "actual_status": 400,
+          "passed": true
+        },
+        {
+          "description": "Missing action",
+          "endpoint": "/api/projects",
+          "expected_status": [
+            400
+          ],
+          "actual_status": 400,
+          "passed": true
+        },
+        {
+          "description": "Missing project name",
+          "endpoint": "/api/projects",
+          "expected_status": [
+            400
+          ],
+          "actual_status": 400,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "test": "Data Type Validation",
+      "type": "data_types",
+      "results": [
+        {
+          "description": "String consumption (should be number)",
+          "endpoint": "/api/carbon-calculator/calculate",
+          "expected_status": [
+            400
+          ],
+          "actual_status": 400,
+          "passed": true
+        },
+        {
+          "description": "Negative consumption",
+          "endpoint": "/api/carbon-calculator/calculate",
+          "expected_status": [
+            400
+          ],
+          "actual_status": 400,
+          "passed": true
+        },
+        {
+          "description": "String quantity (should be number)",
+          "endpoint": "/api/cart",
+          "expected_status": [
+            400
+          ],
+          "actual_status": 400,
+          "passed": true
+        },
+        {
+          "description": "Zero quantity",
+          "endpoint": "/api/cart",
+          "expected_status": [
+            400
+          ],
+          "actual_status": 400,
+          "passed": true
+        },
+        {
+          "description": "Invalid project type",
+          "endpoint": "/api/projects",
+          "expected_status": [
+            400
+          ],
+          "actual_status": 400,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "test": "Boundary Value Testing",
+      "type": "boundary_values",
+      "results": [
+        {
+          "description": "Very small consumption",
+          "endpoint": "/api/carbon-calculator/calculate",
+          "expected_status": [
+            200
+          ],
+          "actual_status": 200,
+          "passed": true
+        },
+        {
+          "description": "Large consumption",
+          "endpoint": "/api/carbon-calculator/calculate",
+          "expected_status": [
+            200
+          ],
+          "actual_status": 200,
+          "passed": true
+        },
+        {
+          "description": "Very long project name",
+          "endpoint": "/api/projects",
+          "expected_status": [
+            200,
+            201,
+            400
+          ],
+          "actual_status": 400,
+          "passed": true
+        },
+        {
+          "description": "Maximum quantity",
+          "endpoint": "/api/cart",
+          "expected_status": [
+            200,
+            201,
+            400
+          ],
+          "actual_status": 200,
+          "passed": true
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "response_format": [
+    {
+      "test": "JSON Response Consistency",
+      "type": "response_format",
+      "results": [
+        {
+          "description": "Emission factors response format",
+          "endpoint": "/api/carbon-calculator/emission-factors",
+          "status": 200,
+          "json_valid": true,
+          "fields_present": true,
+          "passed": true
+        },
+        {
+          "description": "Projects response format",
+          "endpoint": "/api/projects",
+          "status": 200,
+          "json_valid": true,
+          "fields_present": true,
+          "passed": true
+        },
+        {
+          "description": "Cart response format",
+          "endpoint": "/api/cart",
+          "status": 200,
+          "json_valid": true,
+          "fields_present": true,
+          "passed": true
+        },
+        {
+          "description": "Calculation response format",
+          "endpoint": "/api/carbon-calculator/calculate",
+          "status": 200,
+          "json_valid": true,
+          "fields_present": true,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "test": "HTTP Status Code Consistency",
+      "type": "status_codes",
+      "results": [
+        {
+          "description": "404 for non-existent endpoint",
+          "endpoint": "/api/nonexistent-endpoint",
+          "status": 404,
+          "json_valid": false,
+          "fields_present": false,
+          "passed": true
+        },
+        {
+          "description": "405 for unsupported method",
+          "endpoint": "/api/projects",
+          "status": 405,
+          "json_valid": false,
+          "fields_present": false,
+          "passed": true
+        },
+        {
+          "description": "405 for wrong method on POST endpoint",
+          "endpoint": "/api/carbon-calculator/calculate",
+          "status": 405,
+          "json_valid": false,
+          "fields_present": false,
+          "passed": true
+        },
+        {
+          "description": "400 for empty request body",
+          "endpoint": "/api/carbon-calculator/calculate",
+          "status": 400,
+          "json_valid": false,
+          "fields_present": false,
+          "passed": true
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "error_handling": [
+    {
+      "test": "Graceful Error Handling",
+      "type": "error_handling",
+      "results": [
+        {
+          "description": "Malformed JSON handling",
+          "endpoint": "/api/carbon-calculator/calculate",
+          "expected_status": [
+            400
+          ],
+          "actual_status": 400,
+          "passed": true
+        },
+        {
+          "description": "Null values handling",
+          "endpoint": "/api/projects",
+          "expected_status": [
+            400
+          ],
+          "actual_status": 400,
+          "passed": true
+        },
+        {
+          "description": "Empty string handling",
+          "endpoint": "/api/cart",
+          "expected_status": [
+            400
+          ],
+          "actual_status": 400,
+          "passed": true
+        },
+        {
+          "description": "Missing required parameters",
+          "endpoint": "/api/verifier",
+          "expected_status": [
+            400
+          ],
+          "actual_status": 400,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "test": "Error Message Quality",
+      "type": "error_messages",
+      "results": [
+        {
+          "description": "Invalid fuel type error message",
+          "endpoint": "/api/carbon-calculator/calculate",
+          "expected_status": [
+            400
+          ],
+          "actual_status": 400,
+          "passed": true
+        },
+        {
+          "description": "Invalid unit error message",
+          "endpoint": "/api/carbon-calculator/calculate",
+          "expected_status": [
+            400
+          ],
+          "actual_status": 400,
+          "passed": true
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "frontend_basic": [
+    {
+      "test": "Page Load Verification",
+      "type": "page_loads",
+      "results": [
+        {
+          "path": "/",
+          "description": "Homepage",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "path": "/calculator",
+          "description": "Carbon Calculator",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "path": "/marketplace",
+          "description": "Marketplace",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "path": "/dashboard",
+          "description": "Dashboard",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "path": "/auth/signin",
+          "description": "Sign In",
+          "status": 200,
+          "passed": true
+        },
+        {
+          "path": "/checkout",
+          "description": "Checkout",
+          "status": 200,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "test": "Basic Frontend Functionality",
+      "type": "frontend_functionality",
+      "results": [
+        {
+          "path": "/",
+          "description": "Homepage contains navigation",
+          "status": 200,
+          "elements_found": true,
+          "has_content": true,
+          "passed": true
+        },
+        {
+          "path": "/calculator",
+          "description": "Calculator page loads forms",
+          "status": 200,
+          "elements_found": true,
+          "has_content": true,
+          "passed": true
+        },
+        {
+          "path": "/marketplace",
+          "description": "Marketplace shows projects",
+          "status": 200,
+          "elements_found": true,
+          "has_content": true,
+          "passed": true
+        }
+      ],
+      "passed": true
+    }
+  ]
+}

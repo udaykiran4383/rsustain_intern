@@ -1,0 +1,233 @@
+{
+  "production_stress": [
+    {
+      "test": "Black Friday Shopping Simulation",
+      "type": "production_stress",
+      "totalRequests": 4275,
+      "successRate": 100,
+      "avgResponseTime": 156,
+      "p95ResponseTime": 264,
+      "requestsPerSecond": 285,
+      "grade": "EXCELLENT",
+      "passed": true
+    },
+    {
+      "test": "Enterprise Carbon Assessment Surge",
+      "type": "production_stress",
+      "totalRequests": 2567,
+      "successRate": 75,
+      "avgResponseTime": 120,
+      "p95ResponseTime": 147,
+      "requestsPerSecond": 214,
+      "grade": "POOR",
+      "passed": false
+    },
+    {
+      "test": "Seller Project Registration Wave",
+      "type": "production_stress",
+      "totalRequests": 7985,
+      "successRate": 100,
+      "avgResponseTime": 11,
+      "p95ResponseTime": 25,
+      "requestsPerSecond": 799,
+      "grade": "EXCELLENT",
+      "passed": true
+    },
+    {
+      "test": "Verifier Queue Processing Stress",
+      "type": "production_stress",
+      "totalRequests": 4243,
+      "successRate": 35,
+      "avgResponseTime": 8,
+      "p95ResponseTime": 14,
+      "requestsPerSecond": 530,
+      "grade": "POOR",
+      "passed": false
+    }
+  ],
+  "integration_tests": [
+    {
+      "test": "Complete Purchase Journey",
+      "type": "integration",
+      "steps": [
+        {
+          "action": "browse_marketplace",
+          "endpoint": "/api/projects",
+          "expectedStatus": 200,
+          "actualStatus": 200,
+          "responseTime": 675,
+          "passed": true
+        },
+        {
+          "action": "calculate_emissions",
+          "endpoint": "/api/carbon-calculator/calculate",
+          "expectedStatus": 200,
+          "actualStatus": 200,
+          "responseTime": 131,
+          "passed": true
+        },
+        {
+          "action": "add_to_cart",
+          "endpoint": "/api/cart",
+          "expectedStatus": 200,
+          "actualStatus": 200,
+          "responseTime": 12,
+          "passed": true
+        },
+        {
+          "action": "view_cart",
+          "endpoint": "/api/cart",
+          "expectedStatus": 200,
+          "actualStatus": 200,
+          "responseTime": 7,
+          "passed": true
+        },
+        {
+          "action": "checkout",
+          "endpoint": "/api/checkout",
+          "expectedStatus": 200,
+          "actualStatus": 200,
+          "responseTime": 9,
+          "passed": true
+        }
+      ],
+      "allStepsPassed": true,
+      "totalTime": 834,
+      "passed": true
+    },
+    {
+      "test": "Seller Onboarding to Approval",
+      "type": "integration",
+      "steps": [
+        {
+          "action": "register_project",
+          "endpoint": "/api/projects",
+          "expectedStatus": 201,
+          "actualStatus": 201,
+          "responseTime": 8,
+          "passed": true
+        },
+        {
+          "action": "submit_verification",
+          "endpoint": "/api/seller",
+          "expectedStatus": 200,
+          "actualStatus": 200,
+          "responseTime": 106,
+          "passed": true
+        },
+        {
+          "action": "verifier_queue",
+          "endpoint": "/api/verifier",
+          "expectedStatus": 200,
+          "actualStatus": 200,
+          "responseTime": 4,
+          "passed": true
+        },
+        {
+          "action": "complete_review",
+          "endpoint": "/api/verifier",
+          "expectedStatus": 200,
+          "actualStatus": 200,
+          "responseTime": 3,
+          "passed": true
+        }
+      ],
+      "allStepsPassed": true,
+      "totalTime": 121,
+      "passed": true
+    },
+    {
+      "test": "Multi-Assessment Workflow",
+      "type": "integration",
+      "steps": [
+        {
+          "action": "create_assessment",
+          "endpoint": "/api/carbon-calculator/assessments",
+          "expectedStatus": 201,
+          "actualStatus": 201,
+          "responseTime": 106,
+          "passed": true
+        },
+        {
+          "action": "add_calculation_1",
+          "endpoint": "/api/carbon-calculator/calculate",
+          "expectedStatus": 200,
+          "actualStatus": 200,
+          "responseTime": 113,
+          "passed": true
+        },
+        {
+          "action": "add_calculation_2",
+          "endpoint": "/api/carbon-calculator/calculate",
+          "expectedStatus": 200,
+          "actualStatus": 200,
+          "responseTime": 114,
+          "passed": true
+        },
+        {
+          "action": "finalize_assessment",
+          "endpoint": "/api/carbon-calculator/assessments",
+          "expectedStatus": 200,
+          "actualStatus": 401,
+          "responseTime": 6,
+          "passed": false
+        }
+      ],
+      "allStepsPassed": false,
+      "totalTime": 339,
+      "passed": false
+    }
+  ],
+  "benchmark_tests": [
+    {
+      "test": "API Response Time Benchmark",
+      "type": "benchmark",
+      "results": [
+        {
+          "endpoint": "/api/carbon-calculator/emission-factors",
+          "iterations": 500,
+          "avgResponseTime": 116,
+          "p95ResponseTime": 130,
+          "targetP95": 150,
+          "targetMet": true
+        },
+        {
+          "endpoint": "/api/projects",
+          "iterations": 500,
+          "avgResponseTime": 231,
+          "p95ResponseTime": 261,
+          "targetP95": 200,
+          "targetMet": false
+        },
+        {
+          "endpoint": "/api/test-db",
+          "iterations": 0,
+          "avgResponseTime": null,
+          "targetP95": 100,
+          "targetMet": false
+        },
+        {
+          "endpoint": "/api/carbon-calculator/calculate",
+          "iterations": 500,
+          "avgResponseTime": 120,
+          "p95ResponseTime": 137,
+          "targetP95": 300,
+          "targetMet": true
+        }
+      ],
+      "benchmarkScore": 50,
+      "passed": false
+    },
+    {
+      "test": "Database Connection Resilience",
+      "type": "unknown",
+      "passed": false
+    },
+    {
+      "test": "Large Data Processing Test",
+      "type": "unknown",
+      "passed": false
+    }
+  ],
+  "reliability_tests": []
+}

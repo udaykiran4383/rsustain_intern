@@ -1,0 +1,357 @@
+{
+  "extreme_edge_cases": [
+    {
+      "test": "Extreme Negative Values Test",
+      "type": "extreme_edge_case",
+      "results": [
+        {
+          "testCase": {
+            "fuelType": "natural_gas",
+            "consumption": -999999,
+            "unit": "MMBtu"
+          },
+          "status": 400,
+          "handled_gracefully": true,
+          "data": {
+            "error": "Consumption must be a positive number"
+          }
+        },
+        {
+          "testCase": {
+            "fuelType": "gasoline",
+            "consumption": -9007199254740991,
+            "unit": "gallon"
+          },
+          "status": 400,
+          "handled_gracefully": true,
+          "data": {
+            "error": "Consumption must be a positive number"
+          }
+        },
+        {
+          "testCase": {
+            "fuelType": "diesel",
+            "consumption": -0.000001,
+            "unit": "gallon"
+          },
+          "status": 400,
+          "handled_gracefully": true,
+          "data": {
+            "error": "Consumption must be a positive number"
+          }
+        }
+      ],
+      "graceful_handling_rate": 100,
+      "passed": true
+    },
+    {
+      "test": "Extreme Large Values Test",
+      "type": "extreme_edge_case",
+      "results": [
+        {
+          "testCase": {
+            "fuelType": "natural_gas",
+            "consumption": 9007199254740991,
+            "unit": "MMBtu"
+          },
+          "status": 400,
+          "handled_gracefully": true,
+          "data": {
+            "error": "Consumption value is unreasonably large. Please verify your input."
+          }
+        },
+        {
+          "testCase": {
+            "fuelType": "gasoline",
+            "consumption": 999999999999,
+            "unit": "gallon"
+          },
+          "status": 400,
+          "handled_gracefully": true,
+          "data": {
+            "error": "Consumption value is unreasonably large. Please verify your input."
+          }
+        },
+        {
+          "testCase": {
+            "fuelType": "coal",
+            "consumption": 100000000000000000000,
+            "unit": "short_ton"
+          },
+          "status": 400,
+          "handled_gracefully": true,
+          "data": {
+            "error": "Consumption value is unreasonably large. Please verify your input."
+          }
+        }
+      ],
+      "graceful_handling_rate": 100,
+      "passed": true
+    },
+    {
+      "test": "Invalid Data Types Test",
+      "type": "extreme_edge_case",
+      "results": [
+        {
+          "testCase": {
+            "fuelType": null,
+            "consumption": 100,
+            "unit": "MMBtu"
+          },
+          "status": 400,
+          "handled_gracefully": true,
+          "data": {
+            "error": "Assessment organization name and year are required for full assessment mode"
+          }
+        },
+        {
+          "testCase": {
+            "fuelType": "natural_gas",
+            "consumption": "invalid",
+            "unit": "MMBtu"
+          },
+          "status": 400,
+          "handled_gracefully": true,
+          "data": {
+            "error": "Consumption must be a positive number"
+          }
+        },
+        {
+          "testCase": {
+            "fuelType": "natural_gas",
+            "consumption": 100,
+            "unit": []
+          },
+          "status": 400,
+          "handled_gracefully": true,
+          "data": {
+            "error": "Calculation failed: Failed to calculate Scope 1 emissions: Error: Cannot convert from  to MMBtu"
+          }
+        },
+        {
+          "testCase": {
+            "fuelType": {},
+            "consumption": 100,
+            "unit": "MMBtu"
+          },
+          "status": 400,
+          "handled_gracefully": true,
+          "data": {
+            "error": "Calculation failed: Failed to calculate Scope 1 emissions: Error: Emission factor not found for fuel/[object Object] in scope 1"
+          }
+        }
+      ],
+      "graceful_handling_rate": 100,
+      "passed": true
+    },
+    {
+      "test": "Unicode and Special Characters Test",
+      "type": "extreme_edge_case",
+      "results": [
+        {
+          "testCase": {
+            "action": "create",
+            "name": "测试项目🌳🌍",
+            "description": "Unicode test ñáéíóú",
+            "project_type": "reforestation"
+          },
+          "status": 201,
+          "handled_gracefully": true,
+          "data": {
+            "message": "Project created successfully (demo mode)",
+            "project": {
+              "id": "project-1752174843322-72zo9kxr6",
+              "name": "测试项目🌳🌍",
+              "description": "Unicode test ñáéíóú",
+              "location": "Global",
+              "project_type": "reforestation",
+              "certification": "VERRA",
+              "total_credits": 1000,
+              "available_credits": 1000,
+              "price_per_credit": 25,
+              "vintage_year": 2025,
+              "status": "draft",
+              "verification_status": "not_submitted",
+              "seller_id": null,
+              "created_at": "2025-07-10T19:14:03.322Z",
+              "updated_at": "2025-07-10T19:14:03.322Z"
+            },
+            "note": "Demo mode - projects table not available"
+          }
+        },
+        {
+          "testCase": {
+            "action": "create",
+            "name": "🔥💧⚡",
+            "description": "Emoji test",
+            "project_type": "renewable_energy"
+          },
+          "status": 201,
+          "handled_gracefully": true,
+          "data": {
+            "message": "Project created successfully (demo mode)",
+            "project": {
+              "id": "project-1752174843333-ng8t38hv0",
+              "name": "🔥💧⚡",
+              "description": "Emoji test",
+              "location": "Global",
+              "project_type": "renewable_energy",
+              "certification": "VERRA",
+              "total_credits": 1000,
+              "available_credits": 1000,
+              "price_per_credit": 25,
+              "vintage_year": 2025,
+              "status": "draft",
+              "verification_status": "not_submitted",
+              "seller_id": null,
+              "created_at": "2025-07-10T19:14:03.333Z",
+              "updated_at": "2025-07-10T19:14:03.333Z"
+            },
+            "note": "Demo mode - projects table not available"
+          }
+        },
+        {
+          "testCase": {
+            "action": "create",
+            "name": "Test\t\n\r",
+            "description": "Control chars",
+            "project_type": "reforestation"
+          },
+          "status": 201,
+          "handled_gracefully": true,
+          "data": {
+            "message": "Project created successfully (demo mode)",
+            "project": {
+              "id": "project-1752174843341-u6aoux69a",
+              "name": "Test\t\n\r",
+              "description": "Control chars",
+              "location": "Global",
+              "project_type": "reforestation",
+              "certification": "VERRA",
+              "total_credits": 1000,
+              "available_credits": 1000,
+              "price_per_credit": 25,
+              "vintage_year": 2025,
+              "status": "draft",
+              "verification_status": "not_submitted",
+              "seller_id": null,
+              "created_at": "2025-07-10T19:14:03.341Z",
+              "updated_at": "2025-07-10T19:14:03.341Z"
+            },
+            "note": "Demo mode - projects table not available"
+          }
+        }
+      ],
+      "graceful_handling_rate": 100,
+      "passed": true
+    }
+  ],
+  "concurrency_stress": [
+    {
+      "test": "Database Transaction Integrity Test",
+      "type": "concurrency",
+      "total_requests": 6924,
+      "success_rate": 100,
+      "passed": true
+    },
+    {
+      "test": "Memory Leak Detection Test",
+      "type": "memory",
+      "avg_heap_increase": 9515.28,
+      "memory_leak_detected": false,
+      "passed": true
+    },
+    {
+      "test": "Session Management Stress Test",
+      "type": "unknown",
+      "passed": false
+    }
+  ],
+  "advanced_security": [],
+  "performance_analytics": [
+    {
+      "test": "Response Time Distribution Analysis",
+      "type": "performance_analytics",
+      "metrics": {
+        "min": 105,
+        "max": 197,
+        "avg": 119,
+        "p50": 117,
+        "p90": 129,
+        "p95": 136,
+        "p99": 160
+      },
+      "performance_grade": "GOOD",
+      "passed": true
+    },
+    {
+      "test": "Throughput Analysis",
+      "type": "unknown",
+      "passed": false
+    },
+    {
+      "test": "Resource Usage Monitoring",
+      "type": "unknown",
+      "passed": false
+    }
+  ],
+  "business_logic": [
+    {
+      "test": "Carbon Calculation Accuracy Test",
+      "type": "business_logic",
+      "results": [
+        {
+          "input": {
+            "fuelType": "natural_gas",
+            "consumption": 1,
+            "unit": "MMBtu"
+          },
+          "expected_range": [
+            0.05,
+            0.06
+          ],
+          "actual_value": 0.053020000000000005,
+          "accurate": true
+        },
+        {
+          "input": {
+            "fuelType": "gasoline",
+            "consumption": 1,
+            "unit": "gallon"
+          },
+          "expected_range": [
+            0.019,
+            0.021
+          ],
+          "actual_value": 0.01959,
+          "accurate": true
+        },
+        {
+          "input": {
+            "fuelType": "diesel",
+            "consumption": 1,
+            "unit": "gallon"
+          },
+          "expected_range": [
+            0.022,
+            0.024
+          ],
+          "actual_value": 0.022510000000000002,
+          "accurate": true
+        }
+      ],
+      "accuracy_percentage": 100,
+      "passed": true
+    },
+    {
+      "test": "Project Credit Validation Test",
+      "type": "unknown",
+      "passed": false
+    },
+    {
+      "test": "Cart Calculation Integrity Test",
+      "type": "unknown",
+      "passed": false
+    }
+  ]
+}

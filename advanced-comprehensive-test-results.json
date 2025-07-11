@@ -1,0 +1,273 @@
+{
+  "performance": [
+    {
+      "test": "API Response Time Performance",
+      "type": "response_time",
+      "results": [
+        {
+          "endpoint": "/api/projects",
+          "responseTime": 337,
+          "maxTime": 1000,
+          "status": 200,
+          "passed": true
+        },
+        {
+          "endpoint": "/api/carbon-calculator/emission-factors",
+          "responseTime": 138,
+          "maxTime": 1500,
+          "status": 200,
+          "passed": true
+        },
+        {
+          "endpoint": "/api/carbon-calculator/calculate",
+          "responseTime": 143,
+          "maxTime": 2000,
+          "status": 200,
+          "passed": true
+        },
+        {
+          "endpoint": "/api/cart",
+          "responseTime": 23,
+          "maxTime": 1000,
+          "status": 200,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "test": "Load Testing",
+      "type": "load_test",
+      "results": {
+        "successRate": 1,
+        "avgResponseTime": 241.91525423728814,
+        "totalRequests": 354,
+        "successfulRequests": 354
+      },
+      "passed": true
+    },
+    {
+      "test": "Memory and Resource Usage",
+      "type": "resource_monitoring",
+      "passed": false
+    }
+  ],
+  "security": [
+    {
+      "test": "Input Sanitization",
+      "type": "sanitization",
+      "results": [
+        {
+          "endpoint": "/api/projects",
+          "payload": "{\"name\":\"<script>alert(\\\"XSS\\\")</script>\",\"descrip...",
+          "status": 400,
+          "passed": true
+        },
+        {
+          "endpoint": "/api/projects",
+          "payload": "{\"name\":\"\\\"; DROP TABLE projects; --\",\"description...",
+          "status": 400,
+          "passed": true
+        },
+        {
+          "endpoint": "/api/projects",
+          "payload": "{\"name\":\"../../etc/passwd\",\"description\":\"Path tra...",
+          "status": 400,
+          "passed": true
+        },
+        {
+          "endpoint": "/api/projects",
+          "payload": "{\"name\":\"javascript:alert(\\\"XSS\\\")\",\"description\":...",
+          "status": 400,
+          "passed": true
+        },
+        {
+          "endpoint": "/api/carbon-calculator/calculate",
+          "payload": "{\"fuelType\":\"<script>alert(\\\"XSS\\\")</script>\",\"con...",
+          "status": 400,
+          "passed": true
+        },
+        {
+          "endpoint": "/api/carbon-calculator/calculate",
+          "payload": "{\"fuelType\":\"natural_gas\",\"consumption\":\"UNION SEL...",
+          "status": 400,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "test": "Authentication & Authorization",
+      "type": "auth_security",
+      "passed": false
+    },
+    {
+      "test": "Rate Limiting & DDoS Protection",
+      "type": "rate_limiting",
+      "results": {
+        "totalRequests": 100,
+        "rateLimitedRequests": 80,
+        "rateLimitingActive": true
+      },
+      "passed": true
+    }
+  ],
+  "edge_cases": [
+    {
+      "test": "Extreme Data Values",
+      "type": "boundary_testing",
+      "results": [
+        {
+          "endpoint": "/api/carbon-calculator/calculate",
+          "value_type": "fuelType",
+          "status": 429,
+          "passed": true
+        },
+        {
+          "endpoint": "/api/carbon-calculator/calculate",
+          "value_type": "fuelType",
+          "status": 429,
+          "passed": true
+        },
+        {
+          "endpoint": "/api/carbon-calculator/calculate",
+          "value_type": "fuelType",
+          "status": 429,
+          "passed": true
+        },
+        {
+          "endpoint": "/api/carbon-calculator/calculate",
+          "value_type": "fuelType",
+          "status": 429,
+          "passed": true
+        },
+        {
+          "endpoint": "/api/projects",
+          "value_type": "name",
+          "status": 400,
+          "passed": true
+        },
+        {
+          "endpoint": "/api/projects",
+          "value_type": "name",
+          "status": 400,
+          "passed": true
+        },
+        {
+          "endpoint": "/api/projects",
+          "value_type": "name",
+          "status": 400,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "test": "Concurrent Operations",
+      "type": "concurrency",
+      "results": [
+        {
+          "operation": "cart_operations",
+          "totalOperations": 15,
+          "successfulOperations": 15,
+          "passed": true
+        },
+        {
+          "operation": "project_crud",
+          "totalOperations": 15,
+          "successfulOperations": 15,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "test": "Data Consistency Under Stress",
+      "type": "stress_consistency",
+      "passed": false
+    }
+  ],
+  "integration": [
+    {
+      "test": "Cross-Service Workflow",
+      "type": "workflow_integration",
+      "results": [
+        {
+          "workflow": "Complete Carbon Assessment Workflow",
+          "steps": [
+            {
+              "step": "create_assessment",
+              "endpoint": "/api/carbon-calculator/assessments",
+              "status": 201,
+              "passed": true
+            },
+            {
+              "step": "add_calculations",
+              "endpoint": "/api/carbon-calculator/calculate",
+              "status": 429,
+              "passed": false
+            },
+            {
+              "step": "verify_assessment",
+              "endpoint": "/api/carbon-calculator/assessments",
+              "status": 200,
+              "passed": true
+            }
+          ],
+          "passed": false
+        },
+        {
+          "workflow": "End-to-End Purchase Workflow",
+          "steps": [
+            {
+              "step": "browse_projects",
+              "endpoint": "/api/projects",
+              "status": 200,
+              "passed": true
+            },
+            {
+              "step": "add_to_cart",
+              "endpoint": "/api/cart",
+              "status": 200,
+              "passed": true
+            },
+            {
+              "step": "checkout",
+              "endpoint": "/api/checkout",
+              "status": 200,
+              "passed": true
+            }
+          ],
+          "passed": true
+        }
+      ],
+      "passed": false
+    },
+    {
+      "test": "API Dependencies",
+      "type": "dependency_testing",
+      "passed": false
+    }
+  ],
+  "scalability": [
+    {
+      "test": "Database Performance",
+      "type": "database_scaling",
+      "results": [
+        {
+          "operation": "large_dataset_queries",
+          "endpoint": "/api/projects",
+          "responseTime": 254,
+          "status": 200,
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    {
+      "test": "Caching Effectiveness",
+      "type": "cache_performance",
+      "passed": false
+    }
+  ]
+}

@@ -191,11 +191,16 @@ export async function POST(request: NextRequest) {
         })
 
       case 'review':
+        // Validate required parameters for review action
+        if (!verification_id) {
+          return NextResponse.json({ error: 'Verification ID is required for review' }, { status: 400 })
+        }
+        
         // Handle project review action
         return NextResponse.json({
           message: 'Project review completed (demo mode)',
           verification: {
-            id: verification_id || 'test-verification',
+            id: verification_id,
             status: 'reviewed',
             reviewer_comments: updateData?.comments || 'Review completed',
             review_date: new Date().toISOString()

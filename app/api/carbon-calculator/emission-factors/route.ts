@@ -78,9 +78,12 @@ export async function GET(request: NextRequest) {
         }, {})
 
         return NextResponse.json({
-          factors: filteredMock,
-          grouped: grouped,
-          total: filteredMock.length,
+          status: 'success',
+          data: {
+            factors: filteredMock,
+            grouped: grouped,
+            total: filteredMock.length
+          },
           note: 'Using mock data - emission_factors table not found. Please run setup-carbon-calculator.sql'
         })
       }
@@ -100,9 +103,12 @@ export async function GET(request: NextRequest) {
     }, {})
 
     return NextResponse.json({
-      factors: factors || [],
-      grouped: grouped || {},
-      total: factors?.length || 0
+      status: 'success',
+      data: {
+        factors: factors || [],
+        grouped: grouped || {},
+        total: factors?.length || 0
+      }
     })
 
   } catch (error: any) {

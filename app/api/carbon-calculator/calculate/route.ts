@@ -2,10 +2,19 @@ import { NextRequest, NextResponse } from 'next/server'
 import { carbonCalculator, Scope1Input, Scope2Input, Scope3Input, AssessmentInput } from '@/lib/carbon-calculator'
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
+import { createEnhancedRateLimiter } from '@/lib/rate-limiter'
+
+// Create rate limiter for calculation endpoint (30 requests per minute + burst protection)
+const rateLimiter = createEnhancedRateLimiter('calculate');
 
 // Calculate carbon footprint for a complete assessment
 export async function POST(request: NextRequest) {
   try {
+    // Apply rate limiting first
+    const rateLimitResult = rateLimiter(request);
+    if (!rateLimitResult.allowed) {
+      return rateLimitResult.error!;
+    }
     const supabase = createRouteHandlerClient({ cookies })
     
     // Get user if authenticated (allow anonymous calculations)
